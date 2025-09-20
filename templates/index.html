@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CMLRE Marine Platform Prototype</title>
+    <title>MANTRA - Marine AI for National Transformation & Resource Assessment</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,13 +34,22 @@
             .control-panel { flex-direction: column; align-items: stretch; } 
             header h1 { font-size: 2em; }
         }
+
+        /* Added new styles */
+        .logo { font-size: 3em; margin-bottom: 15px; }
+        .subtitle { font-size: 1.2em; opacity: 0.9; margin-bottom: 20px; }
+        .map-container { height: 500px; width: 100%; margin: 20px 0; }
+        .viz-controls { display: flex; gap: 10px; margin: 15px 0; }
+        .viz-controls button { padding: 8px 15px; border-radius: 4px; border: none; cursor: pointer; }
+        .viz-controls button.active { background: #1e3c72; color: white; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🌊 CMLRE Marine Living Resources Platform</h1>
-            <p><strong>Prototype v0.1</strong> | India EEZ Fisheries Analysis ({{ years_range }})</p>
+            <h1>MANTRA</h1>
+            <p class="subtitle">Marine AI for National Transformation & Resource Assessment</p>
+            <p>India EEZ Fisheries Analysis Platform ({{ years_range }})</p>
         </header>
         
         <div class="metrics-grid">
@@ -63,7 +72,13 @@
         </div>
         
         <div class="charts">
-            <div class="chart-row">
+            <div class="viz-controls">
+                <button onclick="switchView('charts')" class="active">📈 Catch Trends</button>
+                <button onclick="switchView('map')">🗺️ EEZ Map</button>
+                <button onclick="switchView('correlations')">🔗 Correlations</button>
+            </div>
+            
+            <div id="viz-charts" class="chart-row">
                 <div class="chart-card">
                     <h3>📈 Catch Trends <span class="loading" id="timeseries-loading">Loading...</span></h3>
                     <div id="timeseries-chart" class="chart-container"></div>
@@ -72,6 +87,11 @@
                     <h3>🔗 Ocean-Fisheries Correlations <span class="loading" id="correlation-loading">Loading...</span></h3>
                     <div id="correlation-chart" class="chart-container"></div>
                 </div>
+            </div>
+            
+            <div id="viz-map" class="chart-card" style="display: none;">
+                <h3>🗺️ Indian EEZ Map</h3>
+                <iframe id="eez-map" class="map-container"></iframe>
             </div>
         </div>
         
@@ -102,7 +122,7 @@
     </div>
     
     <footer>
-        <p><em>CMLRE Prototype | Integrated Sea Around Us & CMLRE Survey Data</em></p>
+        <p><em>MANTRA Prototype | Integrated Sea Around Us & CMLRE Survey Data</em></p>
         <p><small>Ministry of Earth Sciences, Government of India | Prototype v0.1</small></p>
     </footer>
 
@@ -112,7 +132,7 @@
 
         // Load everything when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🌊 CMLRE Prototype loaded');
+            console.log('🌊 MANTRA Prototype loaded');
             loadCharts();
         });
 
@@ -122,7 +142,25 @@
             loadCorrelations();
         }
 
-        // Load timeseries chart
+        // Switch view between charts, map, correlations
+        function switchView(viewType) {
+            // Update button states
+            document.querySelectorAll('.viz-controls button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show/hide views
+            document.getElementById('viz-charts').style.display = viewType === 'charts' ? 'grid' : 'none';
+            document.getElementById('viz-map').style.display = viewType === 'map' ? 'block' : 'none';
+            
+            // Load map if needed
+            if (viewType === 'map' && !document.getElementById('eez-map').src) {
+                document.getElementById('eez-map').src = '/api/visualize/map';
+            }
+        }
+
+        // Load timeseries chart (enhanced with animations)
         function loadTimeseries() {
             const loadingEl = document.getElementById('timeseries-loading');
             loadingEl.textContent = 'Loading chart...';
@@ -139,8 +177,11 @@
                     
                     try {
                         const plotData = JSON.parse(data.plot);
-                        Plotly.newPlot('timeseries-chart', plotData.data, plotData.layout, {
-                            responsive: true
+                        Plotly.newPlot('timeseries-chart', plotData.data, {
+                            ...plotData.layout,
+                            transition: { duration: 500 },
+                            showlegend: true,
+                            hovermode: 'x unified'
                         });
                     } catch (e) {
                         console.error('Plotly error:', e);
