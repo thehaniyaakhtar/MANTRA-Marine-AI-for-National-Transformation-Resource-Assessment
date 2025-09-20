@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+.env
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Data files (raw or large)
+data/
+*.csv
+*.tsv
+*.xlsx
+*.nc
+*.hdf
+*.zip
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor configs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Node/React (if using)
+node_modules/
+build/
+dist/
+
+# Temporary files
+*.tmp
+*.bak

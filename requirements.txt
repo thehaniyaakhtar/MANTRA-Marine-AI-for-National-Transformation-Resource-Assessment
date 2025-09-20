@@ -1,0 +1,12 @@
+pandas 
+numpy 
+duckdb 
+plotly 
+folium 
+scikit-image 
+opencv-python-headless 
+scikit-learn 
+biopython 
+fastapi 
+uvicorn[standard] 
+python-multipart

@@ -1,0 +1,31 @@
+requirements:
+pandas 
+numpy 
+duckdb 
+plotly 
+folium 
+scikit-image 
+opencv-python-headless 
+scikit-learn 
+biopython 
+fastapi 
+uvicorn[standard] 
+python-multipart
+
+datasets:
+IndOBIS Dataset (40001-42000): Species occurrence
+DwC-A (Darwin Core Archive)	
+containing CSVs + metadata + taxonomy tables	
+Small (45 KB for 2,000 records). Contains all occurrence info.
+obis_occurrence.csv
+
+CMFRI Annual Dataset
+Fish landings per species, state, and year
+cmfri_landings.csv
+
+Ocean Parameters (INCOIS)
+Sea Surface Temperature, salinity, ocean depth profiles
+incois_sst.csv
+
+
+
