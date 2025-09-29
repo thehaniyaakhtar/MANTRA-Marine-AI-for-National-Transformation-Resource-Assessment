@@ -4,7 +4,6 @@
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-2.3.3-green.svg)](https://flask.palletsprojects.com)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Prototype-orange.svg)]()
 
 ### 🎯 Project Overview
@@ -202,3 +201,4 @@ Ministry of Earth Sciences, Government of India – Kochi, Kerala
 **MANTRA – Empowering Marine Science with AI**
 *Transforming marine data into actionable insights for sustainable ocean management*
 🌊🤖📊🔬
+
