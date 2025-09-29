@@ -1,0 +1,18 @@
+cd "C:\Users\dell7\OneDrive\Desktop\Sweety\UNI\MANTRA-Marine-AI-for-National-Transformation-Resource-Assessment-main"
+python -m venv .venv
+. .\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+
+pip install -r requirements.txt
+
+python data_ingestion_pipeline.py
+
+python app.py
+
+start http://localhost:5000
+
+python deploy.py --environment development --start
+
+python -m pip install --upgrade pip setuptools wheel
+pip install --only-binary=:all: numpy
+pip install opencv-python-headless

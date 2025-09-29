@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+cmlre-env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Data (keep final.csv but ignore other data files)
+data/*.csv
+!data/final.csv
+
+# Temp files
+*.tmp
+*.temp
+
+# Node (if you add frontend later)
+node_modules/
+
+# React
+frontend/node_modules/
+frontend/.env
+frontend/build/
+
+# Backend (existing)
+cmlre-env/
+__pycache__/
+
+# React
+frontend/node_modules/
+frontend/.env
+frontend/build/
+
+# Backend (existing)
+cmlre-env/
+__pycache__/
